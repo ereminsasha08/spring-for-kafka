@@ -4,7 +4,9 @@ import com.example.aliarslan.basickafkademo.model.KafkaMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
+import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -21,5 +23,8 @@ public class KafkaProducerService {
 
     public void sendMessage(@RequestBody List<KafkaMessage> kafkaMessageList) {
         kafkaMessageList.forEach(kafkaMessage -> kafkaTemplate.send(topic, UUID.randomUUID().toString(), kafkaMessage));
+    }
+    public ListenableFuture<SendResult<String, KafkaMessage>> sendMessage(KafkaMessage kafkaMessage) {
+       return kafkaTemplate.send(topic, UUID.randomUUID().toString(), kafkaMessage);
     }
 }

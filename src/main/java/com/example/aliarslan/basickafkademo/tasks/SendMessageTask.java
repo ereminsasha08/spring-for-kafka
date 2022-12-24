@@ -22,11 +22,8 @@ import java.util.function.Supplier;
 public class SendMessageTask {
     private final KafkaProducerService producer;
 
-    private final KafkaConsumerService consumer;
-
-    public SendMessageTask(KafkaProducerService producer, KafkaConsumerService consumer) {
+    public SendMessageTask(KafkaProducerService producer) {
         this.producer = producer;
-        this.consumer = consumer;
     }
 
     // run every 3 sec
